@@ -1,0 +1,26 @@
+{% extends "journals/base/_base.html" %}
+
+{% block pagetitle %}Archives{% endblock %}
+
+{% block content %}
+<div class="container py-10 min-h-screen">
+    <div class="mt-5 grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-10">
+        <div class="col-span-1">
+            <div class="text-xl lg:text-4xl">{{ volume.name }} {{ issue.name }}</div>
+            <div class="">{{ issue.month }} {{ volume.year }}</div>
+            <div class="">
+                {% include "journals/blocks/ad-space-2.html" %}
+              </div>
+        </div>
+        <div class="col-span-1 md:col-span-3">
+            {% if articles %}
+            {% for article in articles %}
+                {% include "journals/blocks/article-list.html" %}
+            {% endfor %}
+            {% else %}
+            <div class="">No Articles</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

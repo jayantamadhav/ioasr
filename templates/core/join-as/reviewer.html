@@ -1,0 +1,83 @@
+{% extends "core/base/_base.html" %}
+
+{% block pagetitle %}Join as Reviewer{% endblock %}
+
+{% block content %}
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div class="col-span-1 order-2 md:order-1">
+            <div class="bg-white px-5 py-3 flex items-center space-x-2 hover:bg-gray-100 hover:shadow-md cursor-pointer font-bold text-gray-500 hover:text-gray-800" onclick="location.href='{% url "core:join-as-editor" %}'">Join As Editor <i data-feather="arrow-up-right" width="20"></i></div>
+            <div class="bg-white px-5 py-3 flex items-center space-x-2 hover:bg-gray-100 hover:shadow-md cursor-pointer font-bold text-gray-500 hover:text-gray-800" onclick="location.href='{% url "core:join-as-reviewer" %}'">Join As Reviewer <i data-feather="arrow-up-right" width="20"></i></div>
+
+            <div class="mt-5 p-5 bg-white">
+                <div class="text-gray-600">Benefits</div>
+                <ul class="list-inside list-decimal text-sm space-y-2 text-gray-500">
+                    <li>Receive professional recognition along with certificate of appointment</li>
+                    <li>Upto 50% waiver when publishing your own manuscripts.</li>
+                    <li>Enhance credibility and recognition within the scientific community.</li>
+                    <li>Accessing early research findings before publication.</li>
+                </ul>
+            </div>
+
+            <div class="mt-5 p-5 bg-white">
+                <div class="text-gray-600">Responsibilities</div>
+                <ul class="list-inside list-decimal text-sm space-y-2 text-gray-500">
+                    <li>Maintain confidentiality of the reviewed manuscripts.</li>
+                    <li>Review manuscripts within the specified timeline.</li>
+                    <li>Possess expertise in the subject matter of the manuscript.</li>
+                    <li>Provide objective and unbiased evaluations.</li>
+                    <li>Adhere to ethical guidelines and disclose conflicts of interest.</li>
+                    <li>Offer constructive feedback to authors for improvement.</li>
+                    <li>Identify and report instances of plagiarism or misconduct.</li>
+                    <li>Communicate effectively with journal editors.</li>
+                    <li>Demonstrate professional conduct throughout the review process.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-span-1 md:col-span-3 order-1 md:order-2">
+            <div class="bg-white p-5">
+                <div class="text-gray-400 font-bold">Join as Reviewer</div>
+
+                <form class="mt-5" method="POST">
+                    {% csrf_token %}
+                    <div class="max-w-screen-sm">
+                        <div class="mb-5">
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-500">Email address</label>
+                            <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                        </div> 
+                        <div class="mb-5">
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-500">Full Name</label>
+                            <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                        </div>   
+                        <div class="mb-5">
+                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-500">Contact Number</label>
+                            <input type="text" id="phone" name="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                        </div>
+                        <div class="mb-5">
+                            <label for="spacialization" class="block mb-2 text-sm font-medium text-gray-500">Area of Specialization</label>
+                            <input type="text" id="spacialization" name="spacialization" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                        </div>                      
+                        <div class="mb-5">
+                            <label for="affiliation" class="block mb-2 text-sm font-medium text-gray-500">Complete Affiliation</label>
+                            <textarea name="affiliation" id="affiliation" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required></textarea>
+                        </div>
+                        <div class="mb-5">
+                            <label for="publications" class="block mb-2 text-sm font-medium text-gray-500">List of Publications</label>
+                            <textarea name="publications" id="publications" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                        </div>
+
+                        <div class="mb-5">                            
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="picture">Upload Profile Picture</label>
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="picture" type="file" name="picture" accept="image/*" required>
+                        </div>
+                        <div class="mb-5">                            
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="resume">Upload Updated Resume</label>
+                            <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="resume" type="file" name="resume" accept=".doc, .docx, .pdf" required>
+                        </div>
+                        
+                        <button type="submit" class="text-white bg-primary hover:bg-primaryHover focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Apply for Reviewer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

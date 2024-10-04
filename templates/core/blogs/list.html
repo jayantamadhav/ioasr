@@ -1,0 +1,154 @@
+{% extends 'core/base/_base.html' %}
+{% load static %}
+{% load solo_tags %}
+
+{% block pagetitle %}Blogs{% endblock %}
+
+
+{% block content %}
+<div class="md:container">
+
+    <!-- Subscription form -->
+    <div class="my-20">
+        <div class="font-bold text-center text-2xl">Embracing Curiosity: Unveiling Insights, Ideas and Inspiration</div>
+        <div class="mt-5 text-center text-gray-400">Subscribe to our newsletter and blog to never miss out on new insights</div>
+        <div class="flex justify-center">
+            <form class="mt-5 w-96" method="POST" action="{% url 'core:subscribe-newsletter' %}">   
+                {% csrf_token %}
+                <div class="relative">
+                    <input type="email" id="email" name="email" class="block w-full p-3 text-sm border text-gray-900 bg-transparent focus:ring-0 focus:outline-none" placeholder="Enter your email" required />
+                    <button type="submit" class="text-white absolute end-1 bottom-1 bg-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm p-2 px-5">
+                        Subscribe
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Recent -->
+    {% if recent_blogs %}
+    <div class="">
+        <div class="text-xl">Recent Blogs</div>
+        <div class="mt-5 grid grid-cols-1 md:grid-cols-4 gap-5">
+            <div class="col-span-1 md:col-span-2">
+                {% if recent_blogs.0 %}
+                <div class="border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=recent_blogs.0.url %}'">
+                    <img src="{{ recent_blogs.0.featured_image.url }}" class="w-full" />
+                    <div class="p-5">
+                        <div class="mt-2 text-sm text-gray-500 flex justify-start items-center space-x-2">
+                            {% for a in recent_blogs.0.blog_authors.all %}
+                                <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                            {% endfor %}
+                            <div class="">•</div>
+                            <div class="">{{ recent_blogs.0.created_at|date:"d M, Y"}}</div>
+                        </div>
+                        <div class="font-medium text-3xl">{{ recent_blogs.0.heading }}</div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-span-1 md:col-span-2">
+                {% if recent_blogs.1 %}
+                <div class="border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=recent_blogs.1.url %}'">
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                        <div class="col-span-1 md:col-span-2">
+                            <img src="{{ recent_blogs.1.featured_image.url }}" class="w-full" />
+                        </div>
+                        <div class="col-span-1 md:col-span-3 p-3">
+                            <div class="text-sm text-gray-500 flex justify-start items-center space-x-2">
+                                {% for a in recent_blogs.1.blog_authors.all %}
+                                    <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                                {% endfor %}
+                                <div class="">•</div>
+                                <div class="">{{ recent_blogs.1.created_at|date:"d M, Y"}}</div>
+                            </div>
+                            <div class="font-medium text-xl">{{ recent_blogs.1.heading }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if recent_blogs.2 %}
+                <div class="mt-5 border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=recent_blogs.2.url %}'">
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                        <div class="col-span-1 md:col-span-2">
+                            <img src="{{ recent_blogs.2.featured_image.url }}" class="w-full" />
+                        </div>
+                        <div class="col-span-1 md:col-span-3 p-3">
+                            <div class="text-sm text-gray-500 flex justify-start items-center space-x-2">
+                                {% for a in recent_blogs.2.blog_authors.all %}
+                                    <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                                {% endfor %}
+                                <div class="">•</div>
+                                <div class="">{{ recent_blogs.2.created_at|date:"d M, Y"}}</div>
+                            </div>
+                            <div class="mt-1 font-medium text-xl">{{ recent_blogs.2.heading }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if recent_blogs.3 %}
+                <div class="mt-5 border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=recent_blogs.3.url %}'">
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                        <div class="col-span-1 md:col-span-2">
+                            <img src="{{ recent_blogs.3.featured_image.url }}" class="w-full" />
+                        </div>
+                        <div class="col-span-1 md:col-span-3 p-3">
+                            <div class="text-sm text-gray-500 flex justify-start items-center space-x-2">
+                                {% for a in recent_blogs.3.blog_authors.all %}
+                                    <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                                {% endfor %}
+                                <div class="">•</div>
+                                <div class="">{{ recent_blogs.3.created_at|date:"d M, Y"}}</div>
+                            </div>
+                            <div class="mt-1 font-medium text-xl">{{ recent_blogs.3.heading }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if blogs.4 %}
+                <div class="mt-3 border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=blogs.4.url %}'">
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                        <div class="col-span-1 md:col-span-2">
+                            <img src="{{ blogs.4.featured_image.url }}" class="w-full" />
+                        </div>
+                        <div class="col-span-1 md:col-span-3 p-3">
+                            <div class="text-sm text-gray-500 flex justify-start items-center space-x-2">
+                                {% for a in blogs.4.blog_authors.all %}
+                                    <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                                {% endfor %}
+                                <div class="">•</div>
+                                <div class="">{{ blogs.4.created_at|date:"d M, Y"}}</div>
+                            </div>
+                            <div class="mt-1 font-medium text-xl">{{ blogs.4.heading }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Popular -->
+    {% if blogs %}
+    <div class="mt-10 md:mt-20">
+        <div class="">All Blogs</div>
+        <div class="mt-3 grid grid-cols-1 md:grid-cols-3 gap-5">
+            {% for b in blogs %}
+            <div class="border p-3 hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=b.url %}'">
+                <img src="{{ b.featured_image.url }}" class="w-full" />
+                <div class="mt-2 text-sm text-gray-500 flex justify-start items-center space-x-2">
+                    {% for a in b.blog_authors.all %}
+                        <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                    {% endfor %}
+                    <div class="">•</div>
+                    <div class="">{{ b.created_at|date:"d M, Y"}}</div>
+                </div>
+                <div class="mt-3 font-medium text-xl">{{ b.heading }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

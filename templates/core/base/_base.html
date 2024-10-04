@@ -1,0 +1,84 @@
+{% load compress %} 
+{% load static %}
+{% load solo_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    {% block metatags %}
+    <meta property="og:site_name" content="IAR Consortium" />
+    <meta property="og:url" content="https://iarconsortium.org/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="IAR Consortium" />
+    <meta property="og:image" content="https://iarconsortium.org/static/favicon/apple-touch-icon.png" />
+    <meta property="og:description" content="iARCON international LLP is not just a publishing and printing company. We are your dedicated research partner, empowering scholars across the academic and scholarly arena. Forget solutions in bits, we are about holistic support, every step of the way. we take your research and transform it into polished, high-quality publications that command attention. "/>
+    {% endblock %}
+
+    <title>{% block pagetitle %}{% endblock %} | {% get_solo 'core.SiteConfiguration' as site_config %}{{ site_config.site_name }}</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.min.js"></script>
+    {% block extrajs %}{% endblock %}
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'css/output.css' %}" />
+    {% endcompress %}
+    {% block extraCSS %}{% endblock %}
+
+    {% include "add_ons/google_analytics.html" %}
+    
+    {% include "add_ons/google_tag_manager_head.html" %}
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/5dbf1f6d154bf74666b74692/default';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+      })();
+    </script>
+    <!--End of Tawk.to Script-->
+  </head>
+ 
+  <body class="overflow-y-scroll overflow-x-hidden">
+    {% include "add_ons/google_tag_manager_body.html" %}
+
+    <div class="transition-all duration-300 lg:container">
+      {% include "core/base/_navbar.html" %}
+      {% include "core/base/_searchbar.html" %}
+      {% block banner %}{% endblock banner %}
+
+      <div class="min-h-3.5 bg-gray-50 p-5">
+        {% block content %} {% endblock content %}
+      </div>
+      {% include "core/base/_footer.html" %}
+
+      {% include "journals/modals/download-pdf-modal.html" %}
+    </div>
+
+
+    {% block customjs %}
+    <script>
+      feather.replace();
+    </script>
+    {% endblock customjs%}
+  </body>
+</html>

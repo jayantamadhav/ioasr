@@ -1,0 +1,52 @@
+{% load static %}
+<div class="mb-10">
+    <div class="flex justify-start items-center">
+        {{ article.article_type }} 
+        {% if article.is_open_access %}
+            <span class="text-sm ml-3 text-gray-500 flex items-center"><i data-feather="check-circle" class="text-green-600 w-3 mr-1"></i> Open Access</span>
+        {% endif %}
+        </div>
+    <div class="text-xl lg:text-2xl cursor-pointer underline-offset-4 hover:underline hover:text-cyan-700 transition-all duration-200" onclick="location.href='{% url "journals:article" url=journal.url vol=article.issue.volume.pk issue=article.issue.pk article_url=article.url %}'">{{ article.title }}</div>
+    <div class="mt-1 flex flex-wrap">
+        {% for author in article.authors.all %}
+            <div class="text-sky-700 author-link cursor-pointer underline-offset-4 hover:text-sky-600 hover:underline" data-author-id="{{ author.id }}" data-journal-url="{{article.issue.volume.journal.url}}">
+                {% include "journals/blocks/author-name.html" %}{% if not forloop.last %},&nbsp;
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="mb-2 flex justify-start items-center text-gray-500 text-sm space-x-3">
+        <div class="">
+            DOI: {% if article.doi %}<a href="{{ article.doi_link|default:'#' }}" class="hover:underline">{{ article.doi }}</a>{% else %}n/a{% endif %}
+        </div>
+
+        {% if article.page_from and article.page_to %}
+        <div class="">
+            Pages {{ article.page_from }} - {{ article.page_to }}
+        </div>
+        {% endif %}
+    </div>
+    {% if article.is_in_press and article.available_on %}
+        <div class="mb-2">
+            Available on {{ article.available_on|date:"d/m/Y" }}
+        </div>
+    {% endif %}
+    <div class="mt-3 flex justify-start items-center space-x-5">
+        {% if article.abstract %}
+            <div class="article-abstract-btn flex justify-start items-center cursor-pointer hover:text-primary underline-offset-4 hover:underline" data-article="{{ article.id }}">
+                Abstract <i data-feather="chevron-down"></i>
+            </div>
+        {% endif %}
+        {% if article.pdf %}
+            <div data-article-id="{{ article.pk }}" class="download-pdf-modal-open mr-10 flex justify-start items-center text-cyan-700 cursor-pointer underline-offset-4 hover:underline">
+                <img src="{% static 'images/icons/pdf.png' %}" class="w-8 mr-2"> Download PDF
+            </div>
+        {% endif %}
+        {% if article.xml %}
+            <a href="{% if article.xml %}{% url 'journals:article-xml-download' article_id=article.id %}{% else %}#{% endif %}" class="border-t py-3 text-lg flex justify-start items-center text-primary underline-offset-4 hover:underline cursor-pointer">
+                <img src="{% static 'images/icons/xml.png' %}" class="w-8 mr-2" alt="pdf"> Download XML
+            </a>
+        {% endif %}
+    </div>
+    <div id="article-abstract-block-{{ article.id }}"  class="mt-2 hidden bg-gray-100 p-5">{{ article.abstract|safe }}</div>
+</div>

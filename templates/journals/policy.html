@@ -1,0 +1,26 @@
+{% extends "journals/base/_base.html" %}
+
+{% block pagetitle %}{{ policy.name }}{% endblock %}
+
+{% block content %}
+<div class="container mb-20">
+    <div class="py-10 text-xl lg:text-4xl">{{ policy.name }}</div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div class="col-span-1 lg:col-span-3">
+            <ul class="mt-3">
+                {% for p in policies %}
+                    <li><a href="{% url 'journals:policy' url=journal.url policy_url=p.url %}" class="block px-3 py-3 underline-offset-4 hover:underline hover:text-cyan-700">{{ p.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-span-1 lg:col-span-6 p-5">
+            <div class="text-2xl lg:text-2xl font-light">{{ policy.name }}</div>
+            <div class="mt-5">
+                {% if policy %}
+                    {{ policy.content|safe }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

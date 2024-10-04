@@ -1,0 +1,27 @@
+{% load static %}
+<div class="h-full flex flex-col">
+    <div class="text-md text-gray-400">{{ article.article_type }}</div>
+    <div class="text-xl cursor-pointer underline-offset-4 hover:underline hover:text-cyan-700 transition-all duration-200" onclick="location.href='{% url "journals:article" url=journal.url vol=article.issue.volume.pk issue=article.issue.pk article_url=article.url %}'">{{ article.title }}</div>
+    <div class="mt-1 flex flex-wrap">
+        {% for author in article.authors.all %}
+            {% if forloop.first %}
+                <div class="text-gray-500 author-link cursor-pointer underline-offset-4 hover:text-primary hover:underline" data-author-id="{{ author.id }}" data-journal-url="{{article.issue.volume.journal.url}}">{% include "journals/blocks/author-name.html" %}{% if not forloop.last %},&nbsp;{% endif%}</div>
+            {% elif forloop.last %}
+                <div class="text-gray-500 author-link cursor-pointer underline-offset-4 hover:text-primary hover:underline" data-author-id="{{ author.id }}" data-journal-url="{{article.issue.volume.journal.url}}">{% include "journals/blocks/author-name.html" %}{% if not forloop.last %},&nbsp;{% endif%}</div>
+            {% else %}
+                {% if forloop.counter == 2 %}
+                    <span>...</span>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% if article.is_in_press and article.available_on %}
+    <div class="text-gray-500 text-sm h-full flex-grow-1 ">Available On: {{ article.available_on|date:"d/m/Y" }}</div>
+    {% elif not article.is_in_press and article.published %}
+    <div class="text-gray-500 text-sm h-full flex-grow-1 ">Published: {{ article.published|date:"d/m/Y" }}</div>
+    {% endif %}
+
+    <div data-article-id="{{ article.pk }}" class="download-pdf-modal-open border-t py-3 text-sm mt-2 flex justify-start items-center text-primary underline-offset-4 hover:underline cursor-pointer">
+        <img src="{% static 'images/icons/pdf.png' %}" class="w-4 mr-2" /> Download PDF
+    </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="bg-white px-5 py-4">
+  <form id="publisher-search" data-action="{% url 'core:search' %}">
+    <div class="grid grid-cols-2 md:grid-cols-6 gap-3 md:gap-5">
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex justify-center font-bold">Search for Articles</div>
+      </div>
+      <div class="col-span-1">
+        <input
+          type="text"
+          id="ps_keywords"
+          name="ps_keywords"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-gray-500 focus:border-gray-300 block w-full px-2.5 py-1"
+          placeholder="Title/Keyword"
+        />
+      </div>
+      <div class="col-span-1">
+        <input
+          type="text"
+          id="ps_author"
+          name="ps_author"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-gray-500 focus:border-gray-300 block w-full px-2.5 py-1"
+          placeholder="Author/Affiliation/Email"
+        />
+      </div>
+      <div class="col-span-1">
+        <select
+          id="ps_journal"
+          name="ps_journal"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-300 block w-full px-2.5 py-1"
+        >
+          <option value="All" selected>All Journals</option>
+          {% for j in journal_list %}
+          <option value="{{ j }}" class="text-gray-500">{{ j }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-span-1">
+        <select
+          id="ps_articleType"
+          name="ps_articleType"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-300 block w-full px-2.5 py-1"
+        >
+          <option value="All" selected>All Article Types</option>
+          <option value="Research Article">Research Article</option>
+          <option value="Mini Review Article">Mini Review Article</option>
+          <option value="Commentary Article">Commentary Article</option>
+          <option value="Review Article">Review Article</option>
+          <option value="Short Communication">Short Communication</option>
+          <option value="Short Commentary Article">Short Commentary Article</option>
+          <option value="Case Report">Case Report</option>
+          <option value="Case Series">Case Series</option>
+          <option value="Clinical Images">Clinical Images</option>
+          <option value="Editor's pick">Editor's pick</option>
+          <option value="Editorial">Editorial</option>
+          <option value="Elective Report">Elective Report</option>
+          <option value="Letter to the Editor">Letter to the Editor</option>
+          <option value="News Article">News Article</option>
+          <option value="News Section">News Section</option>
+          <option value="Original Article">Original Article</option>
+          <option value="Perspective Article">Perspective Article</option>
+        </select>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex justify-center w-full">
+            <button id="publisher-search-btn" class="bg-primary px-10 py-1 text-sm text-light rounded-md font-bold cursor-pointer hover:bg-primaryHover">Search</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

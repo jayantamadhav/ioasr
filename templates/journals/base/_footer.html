@@ -1,0 +1,42 @@
+{% comment %} <div class="bg-gray-900 text-light">
+    <div class="container py-5 lg:py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-4">
+            <div class="col-span-1">
+                <div class="font-light text-3xl text-light">{{ journal.name }}</div>
+                <div class="flex space-x-2 text-sm">
+                    <div>Open Access</div>
+                </div>
+            </div>
+            <div class="col-span-1">
+                <ul>
+                    <li><a href="{% url 'journals:home' url=journal.url %}">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="{% url 'journals:about' url=journal.url about_type='announcements' %}">Announcements</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1">
+                <ul>
+                    <li><a href="{% url 'journals:insights' url=journal.url %}">Journal Insight</a></li>
+                    {% for p in policies|slice:"0:3" %}
+                        <li><a href="#">{{ p.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-span-1">
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms and Conditions</a></li>
+                    <li><a href="#">Copyright</a></li>
+                    <li><a href="#">Cookie Preference</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center items-center py-2 text-sm">
+        Copyright &copy; <script>document.write(new Date().getFullYear())</script> iARCON International LLP. All Rights Reserved.
+    </div>
+</div> {% endcomment %}
+
+
+{% include "core/base/_footer.html" %}

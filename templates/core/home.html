@@ -1,0 +1,210 @@
+{% extends 'core/base/_base.html' %}
+{% load static %}
+{% load solo_tags %}
+
+{% block pagetitle %}Home{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-5">
+    <div class="col-span-1 bg-white p-5">
+        
+        {% if subjects %}
+        <span class="text-xl">Browse Subjects</span>
+
+        <div class="mt-3 flex justify-start items-start flex-col mb-5">
+            {% for s in subjects %}
+                <div class="flex items-center hover:underline cursor-pointer text-gray-6        00 hover:text-primary py-2 border-b w-full" onclick="location.href='{% url "core:journals" %}?subject={{s.url}}'">{{ s.name }} <i data-feather="arrow-up-right" width="16"></i></div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if journals %}
+        <span class="mt-10 text-xl">Recommended Journals</span>
+
+        <div class="pl-3">
+            {% for j in journals %}
+                <div class="grid grid-cols-6 mt-3 gap-3 group">
+                    <div class="col-span-2">
+                        <img src="{{ j.thumbnail.url }}" />
+                    </div>
+                    <div class="col-span-4 text-sm group-hover:underline group-hover:text-primary cursor-pointer" onclick="location.href='{% url "journals:home" url=j.url %}'">
+                        {{ j.name }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- AD SPACE 2-->
+        {% include "core/blocks/ad-space-2.html" %}
+        
+    </div>
+    <div class="col-span-1 lg:col-span-2 space-y-5">
+        {% get_solo 'core.SiteConfiguration' as site_config %}
+        <div class="bg-white p-5">
+            <div class="text-xl">About <span class="font-medium">{{ site_config.site_name }}</span></div>
+            <div class="mt-5">{{ site_config.about|safe|truncatewords_html:50 }}</div>
+            <div class="text-sm cursor-pointer text-primary hover:underline hover:text-secondary" onclick="location.href='{% url "core:about" %}'">Read more</div>
+        </div>
+
+        <!-- AD SPACE 1-->
+        {% include "core/blocks/ad-space-1.html" %}
+        
+
+
+        <div class="bg-white p-5 mt-5">
+            <div class="mb-5 font-medium text-xl">Recent Articles</div>
+            {% if articles %}
+            {% for article in articles %}
+                {% include "core/blocks/article-list.html" %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="col-span-1 space-y-5">
+        {% if announcements %}
+        <div class="p-5 bg-white">
+            <div class="flex items-center w-full">
+                <div class="font-medium flex-grow">Announcements</div>
+                <div class="text-gray-500 text-sm cursor-pointer hover:underline" onclick="location.href='{% url "core:announcements-list" %}'">Read All ></div>
+            </div>
+            {% for a in announcements %}
+            <div class="mt-3 flex flex-col justify-start">
+                <div class="text-sm">{{ a.created_on|date:"d M, Y"}}</div>
+                <div class="font-medium text-sm cursor-pointer text-primary hover:text-primary hover:underline"  onclick="location.href='{% url "core:announcement-details" pk=a.pk %}'">{{ a.heading }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if news %}
+        <div class="p-5 bg-white">
+            <div class="flex items-center w-full">
+                <div class="font-medium flex-grow">News</div>
+                <div class="text-gray-500 text-sm cursor-pointer hover:underline" onclick="location.href='{% url "core:news-list" %}'">Read All ></div>
+            </div>
+            {% for n in news %}
+            <div class="mt-3 flex flex-col justify-start">
+                <div class="text-sm">{{ n.created_on|date:"d M, Y"}}</div>
+                <div class="font-medium text-sm cursor-pointer text-primary hover:text-primary hover:underline" onclick="location.href='{% url "core:news-details" pk=n.pk %}'">{{ n.heading }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="p-5 bg-white">
+            <div class="font-medium">Special Issues</div>
+        </div>
+
+        <!-- AD SPACE 2-->
+        {% include "core/blocks/ad-space-3.html" %}
+        
+    </div>
+</div>
+
+{% if blogs %}
+<div class="mt-5 bg-white p-5">
+    <div class="flex items-center w-full">
+        <div class="font-medium flex-grow text-xl">Read Our Blogs</div>
+        <div class="text-gray-500 text-sm cursor-pointer hover:underline" onclick="location.href='{% url "core:blog-list" %}'">Read All ></div>
+    </div>
+    <div class="mt-5 grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div class="col-span-1 md:col-span-2">
+            {% if blogs.0 %}
+            <div class="border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=blogs.0.url %}'">
+                <img src="{{ blogs.0.featured_image.url }}" class="w-full" />
+                <div class="p-5">
+                    <div class="mt-2 text-sm text-gray-500 flex justify-start items-center space-x-2">
+                        {% for a in blogs.0.blog_authors.all %}
+                            <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                        {% endfor %}
+                        <div class="">•</div>
+                        <div class="">{{ blogs.0.created_at|date:"d M, Y"}}</div>
+                    </div>
+                    <div class="font-medium text-3xl">{{ blogs.0.heading }}</div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-span-1 md:col-span-2">
+            {% if blogs.1 %}
+            <div class="border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=blogs.1.url %}'">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                    <div class="col-span-1 md:col-span-2">
+                        <img src="{{ blogs.1.featured_image.url }}" class="w-full" />
+                    </div>
+                    <div class="col-span-1 md:col-span-3 p-3">
+                        <div class="text-sm text-gray-500 flex justify-start items-center space-x-2">
+                            {% for a in blogs.1.blog_authors.all %}
+                                <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                            {% endfor %}
+                            <div class="">•</div>
+                            <div class="">{{ blogs.1.created_at|date:"d M, Y"}}</div>
+                        </div>
+                        <div class="font-medium text-xl">{{ blogs.1.heading }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if blogs.2 %}
+            <div class="mt-5 border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=blogs.2.url %}'">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                    <div class="col-span-1 md:col-span-2">
+                        <img src="{{ blogs.2.featured_image.url }}" class="w-full" />
+                    </div>
+                    <div class="col-span-1 md:col-span-3 p-3">
+                        <div class="text-sm text-gray-500 flex justify-start items-center space-x-2">
+                            {% for a in blogs.2.blog_authors.all %}
+                                <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                            {% endfor %}
+                            <div class="">•</div>
+                            <div class="">{{ blogs.2.created_at|date:"d M, Y"}}</div>
+                        </div>
+                        <div class="mt-1 font-medium text-xl">{{ blogs.2.heading }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if blogs.3 %}
+            <div class="mt-5 border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=blogs.3.url %}'">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                    <div class="col-span-1 md:col-span-2">
+                        <img src="{{ blogs.3.featured_image.url }}" class="w-full" />
+                    </div>
+                    <div class="col-span-1 md:col-span-3 p-3">
+                        <div class="text-sm text-gray-500 flex justify-start items-center space-x-2">
+                            {% for a in blogs.3.blog_authors.all %}
+                                <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                            {% endfor %}
+                            <div class="">•</div>
+                            <div class="">{{ blogs.3.created_at|date:"d M, Y"}}</div>
+                        </div>
+                        <div class="mt-1 font-medium text-xl">{{ blogs.3.heading }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            {% if blogs.4 %}
+            <div class="mt-3 border hover:shadow-xl rounded-sm cursor-pointer transition-all duration-300" onclick="location.href='{% url "core:blog-details" url=blogs.4.url %}'">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-3">
+                    <div class="col-span-1 md:col-span-2">
+                        <img src="{{ blogs.4.featured_image.url }}" class="w-full" />
+                    </div>
+                    <div class="col-span-1 md:col-span-3 p-3">
+                        <div class="text-sm text-gray-500 flex justify-start items-center space-x-2">
+                            {% for a in blogs.4.blog_authors.all %}
+                                <div class="">{{a.first_name}} {{ a.last_name}}</div>
+                            {% endfor %}
+                            <div class="">•</div>
+                            <div class="">{{ blogs.4.created_at|date:"d M, Y"}}</div>
+                        </div>
+                        <div class="mt-1 font-medium text-xl">{{ blogs.4.heading }}</div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock %}

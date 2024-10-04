@@ -1,0 +1,60 @@
+{% extends 'core/base/_base.html' %}
+{% load static %}
+{% load solo_tags %}
+
+{% block pagetitle %}Search Results{% endblock %}
+
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-4 gap-5 md:gap-10">
+    <div class="col-span-1 md:p-5">
+        Search Parameters
+
+        <div class="mt-2 text-gray-500 text-sm">
+            Journals: {{ journal }}
+        </div>
+        <div class="mt-2 text-gray-500 text-sm">
+            Article Type: {{ articleType }}
+        </div>
+        {% if keywords %}
+        <div class="mt-2 text-gray-500 text-sm">
+            Keywords: {{ keywords }}
+        </div>
+        {% endif %}
+        {% if author %}
+        <div class="mt-2 text-gray-500 text-sm">
+            Author: {{ author }}
+        </div>
+        {% endif %}
+    </div>
+    <div class="col-span-1 md:col-span-3">
+        <div class="md:p-5">
+            <div class="text-2xl font-extrabold mb-10">Search Results ({{ count }})</div>
+
+            {% for article in object_list %}
+                {% include "core/blocks/article-list.html" %}
+            {% endfor %}
+{% comment %} 
+            <div class="mt-10 flex justify-center">
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-500 text-sm" href="?page=1">&laquo; First</a>
+                            <a class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-500 text-sm" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        {% endif %}
+                
+                        <span class="current px-3 text-gray-600">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+                
+                        {% if page_obj.has_next %}
+                            <a class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-500 text-sm" href="?page={{ page_obj.next_page_number }}">Next</a>
+                            <a class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-500 text-sm" href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div> {% endcomment %}
+        </div>
+    </div>
+</div>
+{% endblock %}

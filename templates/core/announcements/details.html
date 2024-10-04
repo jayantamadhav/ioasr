@@ -1,0 +1,20 @@
+{% extends 'core/base/_base.html' %}
+{% load static %}
+{% load solo_tags %}
+
+{% block pagetitle %}{{ announcement.heading }}{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+    <div class="col-span-1"></div>
+    <div class="col-span-10">
+        <div class="bg-white p-5">
+            <div class="text-gray-500">{{ announcement.created_on|date:"d M, Y"}}</div>
+            <div class="text-primary text-xl font-medium">{{ announcement.heading }}</div>
+            <div class="mt-5">{{ announcement.content|safe }}</div>
+            <div class="mt-5 border-t pt-5 text-sm font-medium text-primary cursor-pointer hover:text-primaryHover"  onclick="location.href='{% url "core:announcements-list" %}'">View all announcement</div>
+        </div>
+    </div>
+    <div class="col-span-1"></div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends 'core/base/_base.html' %}
+{% load static %}
+{% load solo_tags %}
+
+{% block pagetitle %}Privacy Policy{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+    <div class="col-span-1">
+        <div class="bg-white px-5 py-3 flex items-center space-x-2 hover:bg-gray-100 hover:shadow-md cursor-pointer font-bold text-gray-500 hover:text-gray-800" onclick="location.href='{% url "core:privacy-policy" %}'">Privacy Policy <i data-feather="arrow-up-right" width="20"></i></div>
+        <div class="bg-white px-5 py-3 flex items-center space-x-2 hover:bg-gray-100 hover:shadow-md cursor-pointer font-bold text-gray-500 hover:text-gray-800" onclick="location.href='{% url "core:refund-policy" %}'">Refund Policy <i data-feather="arrow-up-right" width="20"></i></div>
+        <div class="bg-white px-5 py-3 flex items-center space-x-2 hover:bg-gray-100 hover:shadow-md cursor-pointer font-bold text-gray-500 hover:text-gray-800" onclick="location.href='{% url "core:terms-and-conditions" %}'">Terms and Conditions <i data-feather="arrow-up-right" width="20"></i></div>
+        
+        <div class="mt-3 p-5">
+            <div class="text-gray-500">Refund Policy</div>
+            In the event of any discrepancies during the order of the hardcopy, upon verification, a refund will be initiated within 7 to 10 days.
+        </div>
+
+        <div class="mt-3 p-5">
+            <div class="text-gray-500">Delivery Timeline</div>
+            Upon receipt of the order and confirmation of payment, the hardcopy will be dispatched and delivered within 7 to 10 days to the author's specified address.
+        </div>
+    </div>
+    <div class="col-span-1 md:col-span-3 p-5 bg-white text-gray-500">
+        <div class="text-3xl mb-10">Privacy Policy</div>
+
+        Protecting your privacy is a priority forhimjournals.com and iARCON as well. This privacy statement explains how we collect and use personal information and how we ensure its security.
+        <br/><br/>
+
+        <strong>Personal Information Collection:</strong><br/>
+        himjournals.com  may collect necessary personal information for the processing and publication of submitted manuscripts. This information may include names, affiliations, and contact details such as postal addresses, emails, phone numbers, and fax numbers.
+        <br/><br/>
+
+        <strong>Using Personal Information:</strong><br/>
+        Any personal information we receive will only be used to process and publish your manuscript. We respect your privacy and will not use your information for any other purposes without your consent.
+        <br/><br/>
+
+        <strong>Disclosure of Personal Information:</strong><br/>
+        We may disclose your personal information if required by law, in connection with legal proceedings, or to protect our legal rights.
+
+        <strong>Securing Your Data:</strong><br/>
+        We take reasonable technical and organisational measures to safeguard your personal information from loss, misuse, or alteration. We use different security measurement parameters that you confidential data won't be leaked without the management conscnet.
+        <br/>
+
+        <div class="mt-5 font-bold text-xl">Cross-Border Data Transfers:</div><br/>
+
+        himjournals.com is a scientific platform service provider registered in kuwait, operated by the parent company Iarcon located in India. This Cross-Border Data Transfers Policy outlines the principles and procedures governing the transfer of personal data across borders by himjournals.com, ensuring compliance with relevant data protection laws and regulations.
+        <br/><br/>
+
+        <strong>Scope:<strong><br/>
+        This policy applies to all employees, contractors, and third parties involved in handling personal data on behalf of himjournals.com, including transfers of data between Bangladesh and India.
+        <br/><br/>
+
+        <strong>Purpose:<strong><br/>
+        The purpose of this policy is to ensure that cross-border data transfers comply with applicable data protection laws and regulations, safeguard the privacy and security of personal data, and maintain transparency and accountability in data processing activities.
+        <br/><br/>
+
+        <strong>Principles:<strong><br/>
+        <ul class="list-inside list-decimal">
+            <li>Lawfulness, Fairness, and Transparency: Cross-border data transfers shall be conducted in accordance with applicable data protection laws and regulations, ensuring fairness, transparency, and respect for the rights of data subjects.</li>
+            <li>Purpose Limitation: Personal data shall only be transferred across borders for specified, explicit, and legitimate purposes, and shall not be further processed in a manner incompatible with those purposes.</li>
+            <li>Data Minimization:Only the minimum amount of personal data necessary for the specified purposes of the transfer shall be transferred across borders.</li>
+            <li>Security: Appropriate technical and organisational measures shall be implemented to ensure the security of personal data transferred across borders, protecting against unauthorised access, disclosure, alteration, or destruction.</li>
+            <li>Accountability: himjournals.com and Iarcon shall be accountable for compliance with this policy and shall demonstrate compliance with applicable data protection laws and regulations.</li>
+        </ul>
+        <br/><br/>
+
+        <strong>Procedures:<strong><br/>
+        <ul class="list-inside list-decimal">
+            <li class="list-item">
+                Legal Basis for Cross-Border Data Transfers: Personal data may be transferred across borders between himjournals.com in kuwait and Iarcon in India on the following legal bases:
+                <br/>
+
+                <string>Consent:<strong>Data subjects have provided explicit consent for the transfer of their personal data.
+                <br/>
+
+                <string>Performance of a Contract:<strong>Data transfers are necessary for the performance of a contract between himjournals.com and the data subject, or for the implementation of pre-contractual measures taken at the data subject's request.
+                <br/>
+
+                <string>Legitimate <strong>Interests: Data transfers are necessary for the legitimate interests pursued by himjournals.com and Iarcon, provided that such interests are not overridden by the rights and freedoms of the data subjects.
+                <br/>
+                
+                <string>Legal <strong>Obligations: Data transfers are necessary for compliance with legal obligations to which himjournals.com and Iarcon are subject.
+            </li>
+
+            <li class="list-item">Data Protection Impact Assessment (DPIA): Prior to transferring personal data across borders, a DPIA shall be conducted to assess the potential risks to the rights and freedoms of data subjects and to identify appropriate measures to mitigate such risks.</li>
+
+            <li class="list-item">Security Measures:Adequate security measures, including encryption, pseudonymization, access controls, and regular security assessments, shall be implemented to ensure the confidentiality, integrity, and availability of personal data during cross-border transfers.</li>
+
+            <li class="list-item">Documentation and Record-Keeping: Records of cross-border data transfers shall be maintained, documenting the legal basis for the transfer, the categories of personal data transferred, the purposes of the transfer, and any safeguards implemented to protect the transferred data.</li>
+
+            <li class="list-item">Training and Awareness: Training and awareness programs shall be provided to employees, contractors, and third parties involved in cross-border data transfers to ensure their understanding of and compliance with this policy and relevant data protection laws and regulations.</li>
+        </ul>
+
+        <br/><br/><br/>
+    </div>
+</div>
+{% endblock %}

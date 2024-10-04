@@ -1,0 +1,20 @@
+{% extends "core/base/_base.html" %}
+{% load solo_tags %}
+
+{% block pagetitle %}Contactt Us{% endblock %}
+
+{% block content %}
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div class="col-span-1 order-2 md:order-1 text-sm">
+            <div class="w-full px-5 py-2 hover:text-gray-600 hover:underline cursor-pointer" onclick="location.href='{% url "core:about" %}'">About Us</div>
+            <div class="w-full px-5 py-2 hover:text-gray-600 hover:underline cursor-pointer" onclick="location.href='{% url "core:contact" %}'">Contact Us</div>
+        </div>
+        <div class="col-span-1 md:col-span-3 order-1 md:order-2">
+            <div class="text-xl">Contact Us</div>
+            {% get_solo 'core.SiteConfiguration' as site_config %}
+            <div class="mt-20">
+                {{ site_config.contact_us|safe }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

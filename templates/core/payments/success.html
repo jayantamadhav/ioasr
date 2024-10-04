@@ -1,0 +1,14 @@
+{% extends "core/base/_base.html" %}
+{% load static %}
+{% load solo_tags %}
+
+{% block pagetitle %}Payment Success{% endblock %}
+
+{% block content %}
+<div class="flex flex-col justify-center items-center" style="min-height: 60vh">
+    <img src="{% static 'images/icons/payment-success.png' %}" class="w-48"/>
+    <div class="text-3xl mt-3">Payment Successful</div>
+    <div class="text-gray-500 mt-3 text-center max-w-sm">We have received your payment</div>
+    <a href="{% url 'core:home' %}" class="text-center text-blue-500 hover:underline mt-5">Go back to home</a>
+</div>
+{% endblock %}

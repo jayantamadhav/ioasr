@@ -1,0 +1,15 @@
+{% extends 'core/base/_base.html' %}
+{% load static %}
+
+{% block pagetitle %}Error{% endblock %}
+
+
+{% block content %}
+<div class="p-10 bg-[#FFCAEC] flex flex-col md:flex-row justify-center items-center w-full">
+    <img src="{% static "images/error.svg" %}" class="md:w-1/3 rounded-md"/>
+    <div class="">
+        <div class="text-3xl md:text-5xl font-bold">Something went wrong!</div>
+        <div class="">Our ninjas are already on it.</div>
+    </div>
+</div>
+{% endblock %}

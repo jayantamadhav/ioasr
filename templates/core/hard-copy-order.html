@@ -1,0 +1,95 @@
+{% extends "core/base/_base.html" %}
+
+{% block pagetitle %}Order Hard Copy{% endblock %}
+
+{% block content %}
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div class="col-span-1 order-2 md:order-1">
+            <div class="mt-5 p-5 bg-white">
+                <div class="text-gray-600">Benefits</div>
+                <ul class="list-inside list-decimal text-sm space-y-2 text-gray-500">
+                    <li>Physical, tangible form for libraries or personal collections.</li>
+                    <li>Independent of electronic devices or internet access.</li>
+                    <li>Immune to data corruption, loss, or format changes.</li>
+                    <li>Valuable for rarity, historical significance, or collectibility.</li>
+                    <li>Essential for journals available exclusively in print.</li>
+                    <li>Appeals to those who enjoy the sensory aspects of reading on paper.</li>
+                    <li>Not affected by power outages, technical failures, or lack of technology.</li>
+                    <li>Facilitates sharing among researchers, colleagues, or students without digital access.</li>
+                    <li>Allows for direct annotation, sticky notes, and highlighting.</li>
+                    <li>Preferred format in certain academic disciplines or communities.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-span-1 md:col-span-3 order-1 md:order-2">
+            <div class="bg-white p-5">
+                <div class="text-gray-400 font-bold">Order Hard Copy</div>
+                
+                <div class="my-5">{% include "_messages.html" %}</div>
+
+                <form class="mt-5" method="POST" id="orderHardCopyForm">
+                    {% csrf_token %}
+                    <div class="max-w-screen-sm">
+                        <div class="mb-5">
+                            <label for=ohc-"email" class="block mb-2 text-sm font-medium text-gray-500">Email address <span class="text-red-500 text-sm">*</span></label>
+                            <input type="email" id="ohc-email" name="ohc-email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                        </div> 
+                        <div class="mb-5">
+                            <label for="ohc-name" class="block mb-2 text-sm font-medium text-gray-500">Full Name <span class="text-red-500 text-sm">*</span></label>
+                            <input type="text" id="ohc-name" name="ohc-name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                        </div>   
+                        <div class="mb-5">
+                            <label for="ohc-phone" class="block mb-2 text-sm font-medium text-gray-500">Contact Number <span class="text-red-500 text-sm">*</span></label>
+                            <input type="text" id="ohc-phone" name="ohc-phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                        </div>            
+                        <div class="mb-5">
+                            <label for="ohc-journal" class="block mb-2 text-sm font-medium text-gray-500">Select Journal <span class="text-red-500 text-sm">*</span></label>
+                            <select id="ohc-journal" name="ohc-journal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" required>
+                                <option selected disabled class="text-gray-400">Choose Journal</option>
+                                {% for j in journals %}
+                                    <option value="{{ j.id }}">{{ j.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="ohc-volumes" class="block mb-2 text-sm font-medium text-gray-500">Select Volume <span class="text-red-500 text-sm">*</span></label>
+                            <select id="ohc-volumes" name="ohc-volume" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" required>
+                                <option selected disabled class="text-gray-400">Choose Volume</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-5">
+                            <label for="ohc-issues" class="block mb-2 text-sm font-medium text-gray-500">Choose Issues <span class="text-red-500 text-sm">*</span></label>
+                            <select id="ohc-issues" name="ohc-issues" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5" required multiple>
+                                <option selected disabled class="text-gray-400">Choose Issues</option>
+                            </select>
+                        </div>
+                        
+                         
+                        <div class="mb-5">
+                            <label for="ohc-copies" class="block mb-2 text-sm font-medium text-gray-500">Number of copies <span class="text-red-500 text-sm">*</span></label>
+                            <input type="text" id="ohc-copies" name="ohc-copies" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                        </div>    
+
+                        <div class="mb-5">
+                            <label for="ohc-address1" class="block mb-2 text-sm font-medium text-gray-500">Address 1 <span class="text-red-500 text-sm">*</span></label>
+                            <textarea name="ohc-address1" id="ohc-address1" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required></textarea>
+                        </div>
+                        <div class="mb-5">
+                            <label for="ohc-address2" class="block mb-2 text-sm font-medium text-gray-500">Address 2</label>
+                            <textarea name="ohc-address2" id="ohc-address2" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                        </div>
+                        <div class="mb-5">
+                            <label for="ohc-remarks" class="block mb-2 text-sm font-medium text-gray-500">Additional Remarks/Requests</label>
+                            <textarea name="ohc-remarks" id="ohc-remarks" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
+                        </div>
+                        
+                        
+                        <button type="submit" class="text-white bg-primary hover:bg-primaryHover focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Apply for Editor</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

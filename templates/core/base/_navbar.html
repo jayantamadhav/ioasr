@@ -1,0 +1,143 @@
+{% load static %}
+{% load solo_tags %}
+
+
+<nav class="bg-white dark:bg-gray-900 z-20 sticky top-0 start-0">
+    <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+      <a href="{% url 'core:home' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
+          {% get_solo 'core.SiteConfiguration' as site_config %}
+          {% if site_config.logo %}
+          <img src="{{ site_config.logo.url }}" class="h-8" alt="Flowbite Logo">
+          {% else %}
+          <span class="hidden lg:block self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+            {{ site_config.site_name }}
+          </span>
+          {% endif %}
+      </a>
+      <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <button type="button" class="text-white bg-primary hover:bg-primaryHover font-medium rounded-md text-sm px-4 py-2 text-center" onclick="location.href='{% url "core:submit-research" %}'">Submit Research</button>
+        <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+        </button>
+        {% comment %} {% if request.user.is_authenticated %}
+        <div>
+          <button class="p-2 flex justify-start items-center" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover" data-dropdown-offset-skidding="-70"><i data-feather="settings"></i></button>
+          <div id="dropdownHover" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+              <li>
+                <a href="{% url 'inscribe:dashboard' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+              </li>
+              <li>
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+              </li>
+              <li>
+                <form method="post" action="{% url 'inscribe:auth-logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="text-left w-full block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Log out</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {% endif %} {% endcomment %}
+      </div>
+      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+          <li>
+            <a href="{% url 'core:home' %}" class="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 font-bold text-gray-600">Home</a>
+          </li>
+          <li>
+            <button 
+              id="navAboutDropdownLink" 
+              data-dropdown-toggle="navAboutDropdown" 
+              data-dropdown-trigger="hover" 
+              data-dropdown-offset-distance="20" 
+              data-dropdown-offset-skidding="56"  
+              class="flex items-center justify-between w-full py-2 px-3 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto font-bold text-gray-600">
+                About <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/></svg>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="navAboutDropdown" class="z-10 hidden font-normal bg-white shadow w-56 border">
+                <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
+                  <li>
+                    <a href="{% url 'core:about' %}" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-white">About Us</a>
+                  </li>
+                  <li>
+                    <a href="{% url 'core:contact' %}" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-white">Contact Us</a>
+                  </li>
+                </ul>
+            </div>
+          </li>
+          <li>
+            <a href="{% url 'core:journals' %}" class="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 font-bold text-gray-600">Journals</a>
+          </li>
+          <li>
+            <button 
+              id="navInformationDropdownLink" 
+              data-dropdown-toggle="navInformationDropdown" 
+              data-dropdown-trigger="hover" 
+              data-dropdown-offset-distance="20" 
+              data-dropdown-offset-skidding="56"  
+              class="flex items-center justify-between w-full py-2 px-3 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto font-bold text-gray-600">
+                Information <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/></svg>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="navInformationDropdown" class="z-10 hidden font-normal bg-white shadow w-56 border">
+                <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
+                  {% if informations %}
+                  {% for i in informations %}
+                  <li>
+                    <a href="{% url 'core:information-details' url=i.url %}" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-white">{{i.name}}</a>
+                  </li>
+                  {% endfor %}
+                  {% else %}
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-white">No Information</a>
+                  </li>
+                  {% endif %}
+                </ul>
+            </div>
+          </li>
+          <li>
+            <button 
+              id="navMembershipDropdownLink" 
+              data-dropdown-toggle="navMembershipDropdown" 
+              data-dropdown-trigger="hover" 
+              data-dropdown-offset-distance="20" 
+              data-dropdown-offset-skidding="45"  
+              class="flex items-center justify-between w-full py-2 px-3 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 md:w-auto font-bold text-gray-600">
+                Memberships <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/></svg>
+            </button>
+
+            <!-- Dropdown menu -->
+            <div id="navMembershipDropdown" class="z-10 hidden font-normal bg-white shadow w-56 border">
+                <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
+                  {% if memberships %}
+                  {% for i in memberships %}
+                  <li>
+                    <a href="{% url 'core:membership-info' url=i.url %}" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-white">{{i.name}}</a>
+                  </li>
+                  {% endfor %}
+                  {% else %}
+                  <li>
+                    <a href="#" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-white">No Information</a>
+                  </li>
+                  {% endif %}
+                </ul>
+            </div>
+          </li>
+          <li>
+            <a href="{% url 'core:blog-list' %}" class="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 font-bold text-gray-600">Blogs</a>
+          </li>
+          <li>
+            <a href="{% url 'core:payments' %}" class="block py-2 px-3  rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 font-bold text-gray-600">Payments</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@100;200;300;400;500;600;700;800&display=swap");
+
+* {
+  font-family: "Manrope", sans-serif !important;
+  /* font-weight: 00 !important; */
+}
+h1 {
+  font-size: 1.476rem !important;
+  font-weight: 600 !important;
+}
+h2 {
+  font-size: 1.383rem !important;
+  font-weight: 600 !important;
+}
+h3 {
+  font-size: 1.296rem !important;
+}
+h4 {
+  font-size: 1.215rem !important;
+}
+h5 {
+  font-size: 1.138rem !important;
+}
+h6 {
+  font-size: 1.067rem !important;
+}
+p {
+  font-size: 1rem !important;
+}
+small {
+  font-size: 0.937rem !important;
+}
+
+body {
+  background-color: #FFFBF5 !important;
+  font-weight: 500;
+}
+
+strong {
+  font-weight: 600 !important;
+}
+table {
+  margin: 20px 0px !important;
+}
+table,
+th,
+td {
+  border: 1px dashed #ccc !important;
+}
+th {
+  font-weight: 500 !important;
+}
+th,
+td {
+  padding: 10px !important;
+}
+
+.section-content > ol li {
+  list-style: decimal;
+  list-style-position: inside;
+}
+
+.section-content a {
+  color: #3081d0 !important;
+}
+.section-content a:hover {
+  text-decoration: underline;
+}
+
+.anchor::before {
+  content: "";
+  display: block;
+  height: 12em !important;
+  margin-top: -12em !important;
+  visibility: hidden;
+}
+
+/* The Modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.journal-box:hover{
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' %3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='0' y1='0' y2='1' gradientTransform='rotate(117,0.5,0.5)'%3E%3Cstop offset='0' stop-color='%23F3F5FF'/%3E%3Cstop offset='1' stop-color='%23E0E0E0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpattern id='b' width='23' height='23' patternUnits='userSpaceOnUse'%3E%3Ccircle fill='%23ffffff' cx='11.5' cy='11.5' r='11.5'/%3E%3C/pattern%3E%3Crect width='100%25' height='100%25' fill='url(%23a)'/%3E%3Crect width='100%25' height='100%25' fill='url(%23b)' fill-opacity='0.1'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+.separator > div:not(:last-child)::after {
+  content: '|';
+}

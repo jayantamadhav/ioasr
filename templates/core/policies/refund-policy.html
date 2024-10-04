@@ -1,0 +1,70 @@
+{% extends 'core/base/_base.html' %}
+{% load static %}
+{% load solo_tags %}
+
+{% block pagetitle %}Refund Policy{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+    <div class="col-span-1">
+        <div class="bg-white px-5 py-3 flex items-center space-x-2 hover:bg-gray-100 hover:shadow-md cursor-pointer font-bold text-gray-500 hover:text-gray-800" onclick="location.href='{% url "core:privacy-policy" %}'">Privacy Policy <i data-feather="arrow-up-right" width="20"></i></div>
+        <div class="bg-white px-5 py-3 flex items-center space-x-2 hover:bg-gray-100 hover:shadow-md cursor-pointer font-bold text-gray-500 hover:text-gray-800" onclick="location.href='{% url "core:refund-policy" %}'">Refund Policy <i data-feather="arrow-up-right" width="20"></i></div>
+        <div class="bg-white px-5 py-3 flex items-center space-x-2 hover:bg-gray-100 hover:shadow-md cursor-pointer font-bold text-gray-500 hover:text-gray-800" onclick="location.href='{% url "core:terms-and-conditions" %}'">Terms and Conditions <i data-feather="arrow-up-right" width="20"></i></div>
+
+        <div class="mt-3 p-5">
+            <div class="text-gray-500">Refund Policy</div>
+            In the event of any discrepancies during the order of the hardcopy, upon verification, a refund will be initiated within 7 to 10 days.
+        </div>
+
+        <div class="mt-3 p-5">
+            <div class="text-gray-500">Delivery Timeline</div>
+            Upon receipt of the order and confirmation of payment, the hardcopy will be dispatched and delivered within 7 to 10 days to the author's specified address.
+        </div>
+    </div>
+    <div class="col-span-1 md:col-span-3 p-5 bg-white text-gray-500">
+        <div class="text-3xl mb-10">Refund Policy</div>
+
+        <div class="text-xl font-bold">Refund Eligibility:</div>
+        Authors who have made payments for journal publication or individual publisher services through himjournals.com, under Iarcon, may be eligible for a refund under certain circumstances.</br>
+        Refunds will only be considered for valid reasons such as technical errors, double payments, or fraudulent transactions.
+        <br/><br/>
+        <div class="text-xl font-bold">Refund Process:</div>
+        Authors must submit a refund request to himjournals.com, detailing the reason for the refund and providing any relevant evidence to support their claim.
+        <br/><br/>
+        Upon receiving a refund request, himjournals.com will conduct a thorough investigation to verify the validity of the claim and assess the evidence provided.
+        <br/><br/>
+        If the claim is deemed valid, himjournals.com will process the refund within a reasonable timeframe.
+        <br/><br/>
+        <div class="text-xl font-bold">Exclusions:</div>
+        Refunds will not be provided for delays in publication or any other publication-related queries.
+        <br/><br/>
+        himjournals.com reserves the right to reject refund requests that do not meet the eligibility criteria or lack sufficient evidence to support the claim.
+        <br/><br/>
+        Dispute Resolution:
+        In cases where there is a dispute regarding a refund request, himjournals.com will engage in a fair and impartial resolution process.
+        <br/><br/>
+        Both the author and himjournals.com will have the opportunity to present their arguments and provide evidence to support their respective positions.
+        <br/><br/>
+        himjournals.com will make a decision based on the evidence presented and will communicate the outcome to the author in a timely manner.
+        <br/><br/>
+        <div class="text-xl font-bold">Legal Action:</div>
+        If a refund request involves fraudulent activity or a violation of the terms and conditions, himjournals.com reserves the right to take legal action against the responsible parties.
+        himjournals.com will cooperate with law enforcement authorities and provide any necessary evidence to support legal proceedings.
+        <br/><br/>
+        <div class="text-xl font-bold">Policy Revision:</div>
+        This refund policy may be revised or updated periodically to ensure its effectiveness and compliance with relevant laws and regulations.<br/>
+        Any changes to the refund policy will be communicated to authors through the himjournals.com website or other appropriate channels.
+
+        <br/><br/><br/>
+
+        <div class="text-xl font-bold">Refund Policy:</div>
+        In the event of any discrepancies during the order of the hardcopy, upon verification, a refund will be initiated within 7 to 10 days.
+        <br/></br>
+
+        <div class="text-xl font-bold">Delivery Timeline:</div>
+        Upon receipt of the order and confirmation of payment, the hardcopy will be dispatched and delivered within 7 to 10 days to the author's specified address.     
+        <br/></br>
+    </div>
+</div>
+    
+{% endblock %}

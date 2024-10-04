@@ -1,0 +1,324 @@
+{% load static %}
+
+{% block extraCSS %}
+<style>
+    .bg-primary {
+        background-color: {{ journal.primary_color }} !important;
+    }
+    .bg-secondary {
+        background-color: {{ journal.secondary_color }} !important;
+    }
+    .bg-light {
+        background-color: {{ journal.light_color }} !important;
+    }
+    .text-primary {
+        color: {{ journal.primary_color }} !important;
+    }
+    .text-secondary {
+        color: {{ journal.secondary_color }} !important;
+    }
+    .text-light {
+        color: {{ journal.light_color }} !important;
+    }
+</style>
+{% endblock %}
+
+
+
+<div id="navbarContainer" class="bg-white top-0 z-10">
+    <div class="container">
+        {% include "core/base/_navbar.html" %}
+    </div>
+    <div class="relative bg-primary text-light">
+        <div id="navbar2" class="flex container py-5 lg:py-12 transition-all duration-300">
+            <div class="lg:block hidden" onclick="location.href='{% url "journals:home" url=journal.url %}'">
+                <img id="navbar2Logo"  src="{{ journal.thumbnail.url }}" class="w-32 shadow-xl cursor-pointer transition-all duration-500">
+            </div>
+            <div id="navbar2Brand" class="lg:ml-10 grid grid-cols-1 lg:grid-cols-4">
+                <div class="col-span-1 lg:col-span-3">
+                    <div class="flex items-center space-x-3 text-sm font-light">
+                        <div class="flex items-center space-x-1">
+                            <img src="{% static 'images/icons/whatsapp.png' %}" class="w-3"/>
+                            <div class="">+91 6002993949</div>
+                        </div>
+                        <div class="flex items-center space-x-1">
+                            <img src="{% static 'images/icons/mail.png' %}" class="w-3"/>
+                            <div class="">submission@iarconsortium.org</div>
+                        </div>
+                    </div>
+                    <div id="navbarJournalName" class="text-3xl lg:text-4xl font-light cursor-pointer" onclick="location.href='{% url "journals:home" url=journal.url %}'">{{ journal.name }}</div>
+                    <div class="flex justify-start items-center space-x-2 lg:mt-1">
+                        <div class="font-light">Open Access</div>
+                    </div>
+                    {% if journal.issn_print %}
+                    <div class="text-sm font-light">ISSN (Print) : {{ journal.issn_print }}</div>
+                    {% endif %}
+                    {% if journal.issn_online %}
+                    <div class="text-sm font-light">ISSN (Online) : {{ journal.issn_online }}</div>
+                    {% endif %}
+                </div>
+                <div class="col-span-1">
+                    <div class="hidden lg:grid grid-cols-2 mt-2 lg:mt-0">
+                        {% if journal.cite_score %}
+                        <div class="col-span-1 pl-5 py-3 {% if journal.impact_factor %}border-r border-gray-800{% endif %}">
+                            <div class="navStat text-2xl font-light">{{ journal.cite_score }}</div>
+                            <div class="mt-1 font-light text-sm">CiteScore</div>
+                        </div>
+                        {% endif %}
+                        {% if journal.impact_factor %}
+                        <div class="col-span-1 pl-10 py-3">
+                            <div class="navStat text-2xl font-light">{{ journal.impact_factor }}</div>
+                            <div class="mt-1 font-light text-sm">Impact Factor</div>
+                        </div>
+                        {% endif %}
+                    </div >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="navbar3" class="border-b border-b-primary">
+        <div class="lg:container flex">
+            <div class="lg:hidden bg-blue-700 flex items-center text-white px-3" id="toggleNavSidebar"><i data-feather="menu" class="w-5 mr-2"></i> Menu</div>
+            <ul class="lg:space-x-12 hidden lg:flex flex-col lg:flex-row pr-12 border-r border-r-gray-300">
+                <li>
+                    <button  class="py-4 text-center inline-flex items-center" type="button" onclick="location.href='{% url "journals:home" url=journal.url %}'">
+                        Home 
+                        <i data-feather="home" class="ml-2 w-4"></i>
+                    </button>
+                </li>
+                <li>
+                    <button id="navAboutHoverButton" data-dropdown-toggle="navArchivesHover" data-dropdown-trigger="hover" data-dropdown-offset-skidding="100" data-dropdown-placement="bottom" class="py-4 text-center inline-flex items-center" type="button">
+                        Archives
+                        <i data-feather="chevron-down" class="ml-2 w-5"></i>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="navArchivesHover" class="right-0 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 border dark:bg-gray-700">
+                        <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                            <li>
+                                <a href="{% url 'journals:archives' url=journal.url %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All Archives</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'journals:special-issue-about' url=journal.url %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Special Issue</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button id="navAboutHoverButton" data-dropdown-toggle="navAboutHover" data-dropdown-trigger="hover" data-dropdown-offset-skidding="100" data-dropdown-placement="bottom" class="py-4 text-center inline-flex items-center" type="button">
+                        About
+                        <i data-feather="chevron-down" class="ml-2 w-5"></i>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="navAboutHover" class="right-0 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 border dark:bg-gray-700">
+                        <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:about" url=journal.url about_type="aim-and-scope"  %}'">Aim and Scope</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:about" url=journal.url about_type="editorial-board"  %}'">Editorial Board</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:insights" url=journal.url %}'">Journal Insights</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:insights" url=journal.url %}#indexing'">Abstracting and Indexing</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:about" url=journal.url about_type="news"  %}'">News</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:about" url=journal.url about_type="announcements"  %}'">Announcements</a>
+                        </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button id="navPublishButton" data-dropdown-toggle="navPublishHover" data-dropdown-trigger="hover" data-dropdown-offset-skidding="100" data-dropdown-placement="bottom"  class="py-4 text-center inline-flex items-center" type="button">
+                        Author Information 
+                        <i data-feather="chevron-down" class="ml-2 w-5"></i>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="navPublishHover" class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-80 dark:bg-gray-700">
+                        <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                            {% if policies %}
+                                {% for policy in policies %}
+                                <li>
+                                    <a href="{% url 'journals:policy' url=journal.url policy_url=policy.url %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ policy.name }}</a>
+                                </li>
+                                {% endfor %}
+                            {% else %}
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">No Policies added yet</a>
+                            </li>
+                            {% endif  %}
+                            {% comment %} <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                            </li> {% endcomment %}
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button  class="py-4 text-center inline-flex items-center" type="button" onclick="location.href='{% url "journals:about" url=journal.url about_type="editorial-board" %}'">
+                        Editorial Board
+                        <i data-feather="arrow-up-right" class="ml-2 w-4"></i>
+                    </button>
+                </li>
+            </ul>
+            <div class="flex-1 border-r border-r-gray-300">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 lg:pl-4 pointer-events-none">
+                        <i data-feather="search" class="text-blue-500"></i>
+                    </div> 
+                    <input id="navbarSearch" type="text" class="bg-white border-0 text-gray-900 rounded-lg focus:ring-0 focus:border-0 focus:bg-gray-50 block w-full pl-10 lg:pl-14 p-3 lg:p-4" placeholder="Search in this journal">
+                </div>
+            </div>
+            <div class="hidden lg:flex border-r border-r-gray-300 px-10 py-4 items-center cursor-pointer submit-article" onclick="location.href='{% if journal.submission_link %}{{ journal.submission_link }}{% else %}#{% endif %}'">Submit your article <i data-feather="arrow-up-right" class="ml-2 w-5"></i></div>
+        </div>
+
+        <div id="navSidebar" class="z-10 fixed inset-y-0 left-0 w-80 bg-gray-900 bg-opacity-80 backdrop-blur-2xl text-white transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto">
+            <div class="w-full bg-gray-950">
+                <div class="text-light px-4 py-5 text-lg">Menu</div>
+            </div>
+            <ul class="px-4 lg:space-x-12 flex flex-col pr-12 border-r border-r-gray-300 w-full">
+                <li class="w-full">
+                    <button class="py-4 text-center inline-flex items-center w-full" type="button" onclick="location.href='{% url "journals:home" url=journal.url %}'">
+                        Home 
+                        <i data-feather="home" class="ml-2 w-5"></i>
+                    </button>
+                </li>
+                <li class="w-full">
+                    <button id="navAboutHoverButton" data-dropdown-toggle="navArchivesHoverMobile" data-dropdown-trigger="hover" class="py-4 text-center inline-flex items-center" type="button">
+                        Archives
+                        <i data-feather="chevron-down" class="ml-2 w-5"></i>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="navArchivesHoverMobile" class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">All Archives</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Special Issue</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="w-full">
+                    <button id="navAboutHoverButton" data-dropdown-toggle="navAboutHoverMobile" data-dropdown-trigger="hover" class="py-4 text-center inline-flex items-center" type="button">
+                        About
+                        <i data-feather="chevron-down" class="ml-2 w-5"></i>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="navAboutHoverMobile" class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:about" url=journal.url about_type="aim-and-scope"  %}'">Aim and Scope</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:about" url=journal.url about_type="editorial-board"  %}'">Editorial Board</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:insights" url=journal.url %}'">Journal Insights</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:insights" url=journal.url %}#indexing'">Abstracting and Indexing</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:about" url=journal.url about_type="news"  %}'">News</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" onclick="location.href='{% url "journals:about" url=journal.url about_type="announcements"  %}'">Announcements</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="w-full">
+                    <button id="navPublishButton"  data-dropdown-offset-skidding="10" data-dropdown-toggle="navPublishHoverMobile" data-dropdown-trigger="hover" class="py-4 text-center inline-flex items-center" type="button">
+                        Author Information
+                        <i data-feather="chevron-down" class="ml-2 w-5"></i>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="navPublishHoverMobile" class="hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                        </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="w-full">
+                    <button class="py-4 text-center inline-flex items-center w-full submit-article" type="button">
+                        Article Submission
+                        <i data-feather="arrow-up-right" class="ml-2 w-5"></i>
+                    </button>
+                </li>
+                <li class="w-full">
+                    <button class="py-4 text-center inline-flex items-center w-full" type="button">
+                        FAQs
+                        <i data-feather="arrow-up-right" class="ml-2 w-5"></i>
+                    </button>
+                </li>
+                {% if not user.is_authenticated %}
+                <li class="w-full">
+                    <button class="py-4 text-center inline-flex items-center w-full" type="button">
+                        Register
+                        <i data-feather="arrow-up-right" class="ml-2 w-5"></i>
+                    </button>
+                </li>
+                <li class="w-full">
+                    <button class="py-4 text-center inline-flex items-center w-full" type="button">
+                        Log In
+                        <i data-feather="log-in" class="ml-2 w-5"></i>
+                    </button>
+                </li>
+                {% else %}
+                <li class="w-full">
+                    <button id="navAboutHoverButton" data-dropdown-toggle="navAboutHoverMobile" data-dropdown-trigger="hover" class="py-4 text-center inline-flex items-center text-primary" type="button">
+                        {{ user.email }}
+                        <i data-feather="chevron-down" class="ml-2 w-5"></i>
+                    </button>
+                    
+                    <!-- Dropdown menu -->
+                    <div id="navAboutHoverMobile" class=" hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Author Panel</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white submit-article" onclick="location.href='{% if journal.submission_link %}{{ journal.submission_link }}{% else %}#{% endif %}'">Submit Article</a>
+                            </li>
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>

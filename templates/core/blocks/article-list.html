@@ -1,0 +1,38 @@
+{% load static %}
+<div class="mb-5 text-sm">
+    <div class="flex justify-start items-center">
+        {{ article.article_type }} 
+        {% if article.is_open_access %}
+            <span class="text-sm ml-3 text-gray-500 flex items-center"><i data-feather="check-circle" class="text-green-600 w-3 mr-1"></i> Open Access</span>
+        {% endif %}
+        </div>
+    <div class="text-lg cursor-pointer underline-offset-4 text-cyan-700 hover:underline hover:text-cyan-700 transition-all duration-200" onclick="location.href='{% url "journals:article" url=article.issue.volume.journal.url vol=article.issue.volume.pk issue=article.issue.pk article_url=article.url %}'">{{ article.title }}</div>
+    <div class="mt-1 flex flex-wrap">
+        {% for author in article.authors.all %}
+            <div class="text-gray-500 author-link cursor-pointer underline-offset-4 hover:text-primary hover:underline" data-author-id="{{ author.id }}" data-journal-url="{{ article.issue.volume.journal.url }}">
+                {% include "journals/blocks/author-name.html" %}{% if not forloop.last %},&nbsp;
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="font-medium">{{ article.issue.volume.journal.name }}</div>
+    <div class="mb-2">
+        {{ article.issue.volume.name }} {{ article.issue.name }} ({{ article.issue.month }}, {{ article.issue.volume.year}})
+        {% if article.page_from and article.page_to %}
+        Pages {{ article.page_from }} - {{ article.page_to }}
+        {% endif %}
+    </div>
+    <div class="mt-3 flex justify-start items-center">
+        {% if article.pdf %}
+            <div data-article-id="{{ article.pk }}"  class="download-pdf-modal-open mr-10 flex justify-start items-center text-cyan-700 cursor-pointer underline-offset-4 hover:underline">
+                <img src="{% static 'images/icons/pdf.png' %}" class="w-8 mr-2"> Download PDF
+            </div>
+        {% endif %}
+        {% comment %} {% if article.abstract %}
+            <div class="article-abstract-btn flex justify-start items-center cursor-pointer hover:text-primary underline-offset-4 hover:underline" data-article="{{ article.id }}">
+                Abstract <i data-feather="chevron-down"></i>
+            </div>
+        {% endif %} {% endcomment %}
+    </div>
+    {% comment %} <div id="article-abstract-block-{{ article.id }}"  class="mt-5 hidden">{{ article.abstract|safe }}</div> {% endcomment %}
+</div>

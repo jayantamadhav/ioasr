@@ -1,0 +1,12 @@
+{% load solo_tags %}
+
+{% get_solo 'core.PublisherAdConfig' as ad_config %}
+{% if ad_config.ad_space_3 %}
+
+<div class="mt-10">
+    <div class="text-center w-full mt-2 text-xs text-gray-600 font-medium">Advertisement</div>
+    <div class="mt-1 flex justify-center">
+        <img src="{{ ad_config.ad_space_3.url }}" class="h-full cursor-pointer" onclick="location.href='{% if ad_config.ad_space_3_link %}{{ ad_config.ad_space_3_link }}{% else %}#{% endif%}'"/>
+    </div>
+</div>
+{% endif %}

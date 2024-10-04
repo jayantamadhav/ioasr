@@ -1,0 +1,120 @@
+{% load solo_tags %}
+{% load static %}
+
+<div class="fixed z-50 bottom-24 right-6">
+    <a aria-label="Chat on WhatsApp" href="https://wa.me/916002993949" target="_blank">
+      {% comment %} <img alt="Chat on WhatsApp" src="{% static 'images/icons/WhatsAppButtonGreenMedium.svg' %}" /> {% endcomment %}
+      <img alt="Chat on WhatsApp" src="{% static 'images/icons/whatsapp.png' %}" class="w-14 rounded-full shadow-md"/>
+    <a />
+</div>
+
+<div class="bg-gray-900 text-light">
+    <div class="container">
+        <div class="pt-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+                <div class="col-span-1">
+                    {% get_solo 'core.SiteConfiguration' as site_config %}
+                    {% if site_config.logo %}
+                    <img src="{{ site_config.logo.url }}" class="h-12 rounded-md" alt="Flowbite Logo">
+                    {% else %}
+                    <span class="hidden lg:block self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                    {{ site_config.site_name }}
+                    </span>
+                    {% endif %}
+
+                    <div class="mt-5 text-sm font-light text-gray-400">
+                        Office Address
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class="font-bold text-sm">Useful Links</div>
+                    <div class="mt-3 flex flex-col text-sm font-light text-gray-400">
+                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:hard-copy-order" %}'">Order Hard Copy <i data-feather="arrow-up-right" width="16"></i></div>
+                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:privacy-policy" %}'">Privacy policy <i data-feather="arrow-up-right" width="16"></i></div>
+                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:terms-and-conditions" %}'">Terms and Conditions <i data-feather="arrow-up-right" width="16"></i></div>
+                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:refund-policy" %}'">Refund Policy  <i data-feather="arrow-up-right" width="16"></i></div>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class="font-bold text-sm">Others</div>
+                    <div class="mt-3 flex flex-col text-sm font-light text-gray-400">
+                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:about" %}'">About Us <i data-feather="arrow-up-right" width="16"></i></div>
+                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:contact" %}'">Contact Us <i data-feather="arrow-up-right" width="16"></i></div>
+                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:payments" %}'">Online Payments <i data-feather="arrow-up-right" width="16"></i></div>
+                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:join-as-editor" %}'">Join as Editor <i data-feather="arrow-up-right" width="16"></i></div>
+                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:join-as-reviewer" %}'">Join as Reviewer <i data-feather="arrow-up-right" width="16"></i></div>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    Subscribe to our Newsletter<br/>
+                    <form class="mt-2" method="POST" action="{% url 'core:subscribe-newsletter' %}">   
+                        {% csrf_token %}
+                        <div class="relative border-b border-b-gray-500">
+                            <input type="email" id="email" name="email" class="block w-full p-4 text-sm border-none text-gray-200 bg-transparent focus:ring-0 focus:outline-none" placeholder="Enter your email" required />
+                            <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-transparent focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"><i data-feather="arrow-right" class="text-gray-400"></i></button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-5 font-bold">Follow us</div>
+                    <div class="mt-2 flex justify-start items-center space-x-2">
+                        <img 
+                        src="{% static 'images/icons/googlescholar.png' %}" 
+                        class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
+                        {% if site_config.google_scholar %}
+                        onclick="location.href='{{google_scholar}}'"
+                        {% endif %}
+                        />
+                        <img 
+                        src="{% static 'images/icons/academia-edu.png' %}" 
+                        class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl bg-white" 
+                        onclick="location.href='https://independent.academia.edu/IarconInternational'"
+                        />
+                        <img 
+                        src="{% static 'images/icons/facebook.png' %}" 
+                        class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
+                        onclick="location.href='https://www.facebook.com/iarcon'"
+                        />
+                        <img 
+                        src="{% static 'images/icons/linkedin.png' %}" 
+                        class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
+                        onclick="location.href='https://www.linkedin.com/company/iarcon/'"
+                        />
+                        <img 
+                        src="{% static 'images/icons/twitter.png' %}" 
+                        class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
+                        onclick="location.href='https://www.twitter.com/IARCONGlobal'"
+                        />
+                        <img 
+                        src="{% static 'images/icons/youtube.png' %}" 
+                        class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
+                        onclick="location.href='https://www.youtube.com/@IARCON'"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-10">
+            <div class="font-bold text-sm">MOST SEARCHED KEYWORDS</div>
+            <div class="mt-2 text-sm flex justify-start items-center space-x-1 flex-wrap ">
+                {% for k in footer_keywords %}
+                <div class="text-sm text-gray-400 cursor-pointer hover:underline font-light flex">{{ k.keyword }}<i data-feather="arrow-up-right" width="16"></i></div>{% if not forloop.last %}<div class="text-gray-400">&nbsp;|&nbsp;</div>{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="mt-10 flex justify-center items-center py-2 text-sm text-gray-400">
+            Copyright &copy; 
+            {% get_solo 'core.SiteConfiguration' as site_config %}
+                {% if site_config.footer_copyright_label %}
+                    {{ site_config.footer_copyright_label }}
+                {% else %}
+                <span class="hidden lg:block self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                    {{ site_config.site_name }}
+                </span>
+            {% endif %}
+            <script>document.write(new Date().getFullYear())</script>.
+            All Rights Reserved.
+        </div>
+    </div>
+</div>
