@@ -16,4 +16,4 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         key: ${{ secrets.PRIVATE_KEY }}
         port: 22
-        script: bash publishers/deploy.sh iarconsortium iarconsortium-service
+        script: bash deploy.sh
