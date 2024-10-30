@@ -37,13 +37,13 @@
             <div id="navbar2Brand" class="lg:ml-10 grid grid-cols-1 lg:grid-cols-4">
                 <div class="col-span-1 lg:col-span-3">
                     <div class="flex items-center space-x-3 text-sm font-light">
-                        <div class="flex items-center space-x-1">
+                        {% comment %} <div class="flex items-center space-x-1">
                             <img src="{% static 'images/icons/whatsapp.png' %}" class="w-3"/>
                             <div class="">+91 6002993949</div>
-                        </div>
+                        </div> {% endcomment %}
                         <div class="flex items-center space-x-1">
                             <img src="{% static 'images/icons/mail.png' %}" class="w-3"/>
-                            <div class="">submission@iarconsortium.org</div>
+                            <div class="">submission@ioasr.org</div>
                         </div>
                     </div>
                     <div id="navbarJournalName" class="text-3xl lg:text-4xl font-light cursor-pointer" onclick="location.href='{% url "journals:home" url=journal.url %}'">{{ journal.name }}</div>

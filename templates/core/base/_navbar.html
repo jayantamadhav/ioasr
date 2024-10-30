@@ -118,6 +118,9 @@
             <div id="navMembershipDropdown" class="z-10 hidden font-normal bg-white shadow w-56 border">
                 <ul class="text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownLargeButton">
                   {% if memberships %}
+                  <li>
+                    <a href="{% url 'core:membership-apply' %}" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-white">Apply for Membership</a>
+                  </li>
                   {% for i in memberships %}
                   <li>
                     <a href="{% url 'core:membership-info' url=i.url %}" class="block px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:text-white">{{i.name}}</a>

@@ -55,6 +55,10 @@ td {
   padding: 10px !important;
 }
 
+.list-circle {
+  list-style-type: circle !important;
+}
+
 .section-content > ol li {
   list-style: decimal;
   list-style-position: inside;

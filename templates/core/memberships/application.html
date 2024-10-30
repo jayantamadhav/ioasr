@@ -1,0 +1,64 @@
+{% extends 'core/base/_base.html' %}
+{% load static %}
+{% load solo_tags %}
+
+{% block pagetitle %}Apply for Membership{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+    <div class="col-span-1"></div>
+    <div class="col-span-10">
+        <div class="bg-white p-5">
+            <div class="text-xl">Apply for Membership</div>
+            {% include "core/base/_messages.html" %}
+            <form class="mt-5" method="POST">
+                {% csrf_token %}
+                <div class="max-w-screen-sm">
+                    <div class="mb-5">
+                        <select
+                          id="membership_type"
+                          name="membership_type"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-300 block w-full px-2.5 py-1"
+                          required
+                        >
+                            {% for membership in memberships %}
+                                <option value="{{ membership.name }}">{{membership.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-5">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-500">Full Name</label>
+                        <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                    </div>
+                    <div class="mb-5">
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-500">Email address</label>
+                        <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                    </div> 
+                    <div class="mb-5">
+                        <label for="phone" class="block mb-2 text-sm font-medium text-gray-500">Contact Number</label>
+                        <input type="text" id="phone" name="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                    </div>
+                    <div class="mb-5">
+                        <label for="qualification" class="block mb-2 text-sm font-medium text-gray-500">Qualification</label>
+                        <input type="text" name="qualification" id="qualification" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
+                    </div>
+                    <div class="mb-5">
+                        <label for="specialization" class="block mb-2 text-sm font-medium text-gray-500">Area of Specialization</label>
+                        <input type="text" id="specialization" name="specialization" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-gray-500 focus:border-gray-500 block w-full p-2" required />
+                    </div>                      
+                    <div class="mb-5">
+                        <label for="affiliation" class="block mb-2 text-sm font-medium text-gray-500">Complete Affiliation</label>
+                        <textarea name="affiliation" id="affiliation" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required></textarea>
+                    </div>
+                    <div class="mb-5">                            
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="image">Upload Profile Picture</label>
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="image" type="file" name="image" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="text-white bg-primary hover:bg-primaryHover focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Apply for Membership</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-span-1"></div>
+</div>
+{% endblock %}

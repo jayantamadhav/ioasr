@@ -33,31 +33,16 @@
         <div class="bg-white p-5 border mb-5">
             <div class="text-xl font-bold">{{ membership.name }}</div>
             <div class="mt-5">{{ membership.about|safe }}</div>
+            <button type="button" class="mt-5 text-white bg-primary hover:bg-primaryHover font-medium rounded-md text-sm px-4 py-2 text-center" onclick="location.href='{% url "core:membership-apply" %}'">Apply for Membership</button>
         </div>
 
         {% if members %}
         <div class="bg-white p-5 border mb-5">
             <div class="text-xl font-bold">Members</div>
-            <div class="mt-5 grid grid-cols-1 md:grid-cols-4 gap-5">
+            <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5">
                 {% for member in members %}
                 <div class="col-span-1">
-                    <div class="h-full bg-white p-5 border hover:shadow flex flex-col items-center justify-center">
-                        {% if member.image %}
-                        <img src="{{ member.image.url }}" class="w-32 h-32 rounded-full">
-                        {% else %}
-                        <img src="{% static 'images/icons/user.png' %}" class="w-32 h-32 rounded-full">
-                        {% endif %}
-                        <div class="text-center mt-3 font-bold text-lg">{{ member.name }}</div>
-                        {% if member.qualification %}
-                        <div class="text-center text-gray-500 text-xs">{{ member.qualification }}</div>
-                        {% endif %}
-                        {% if member.affiliation %}
-                        <div class="text-center text-gray-500 text-xs"><i>{{ member.affiliation }}</i></div>
-                        {% endif %}
-                        {% if member.institution %}
-                        <div class="text-center text-gray-500 text-xs"><i>{{ member.institution }}</i></div>
-                        {% endif %}
-                    </div>
+                    {% include "core/memberships/member-info.html" %}
                 </div>
                 {% endfor %}
             </div>

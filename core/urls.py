@@ -36,5 +36,6 @@ urlpatterns = [
     path("payments/failed/", PaymentFailedView.as_view(), name="payments-failed"),
     
     # Memberships
+    path("membership/apply/", MembershipApplicationView.as_view(), name="membership-apply"),
     path("membership/<str:url>/", MembershipInfoView.as_view(), name="membership-info"),
 ]

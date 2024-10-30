@@ -12,7 +12,8 @@ from core.models import (
     Blog,
     BlogAuthor,
     Membership,
-    Member
+    Member,
+    MembershipApplication
 )
 from core.models.core import Application, HardCopyOrder
 from core.models.payments import Payment
@@ -157,6 +158,10 @@ class PaymentAdmin(admin.ModelAdmin):
     list_display = ("rzp_order_id", "email", "amount", "currency",)
     search_fields = ("email", "rzp_order_id", "rzp_payment_id", "rzp_signature", )
 
+class MembershipApplicationAdmin(admin.ModelAdmin):
+    model = MembershipApplication
+    list_display = ("email", "name", "membership_type", "created_at")
+    search_fields = ("email", "name", "phone")
 
 # Register your models here.
 admin.site.register(SiteConfiguration, SiteConfigurationAdmin)
@@ -172,6 +177,7 @@ admin.site.register(About)
 admin.site.register(Membership)
 admin.site.register(Member)
 admin.site.register(FooterKeyword)
+admin.site.register(MembershipApplication, MembershipApplicationAdmin)
 admin.site.register(NewsletterSubscription)
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(User, UserAdmin)

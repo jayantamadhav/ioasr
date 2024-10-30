@@ -1,0 +1,31 @@
+{% load static %}
+<div class="h-full bg-white p-5 border">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="col-span-1">
+            <div class="w-full flex justify-center items-center">
+                {% if member.image %}
+                <img src="{{ member.image.url }}" class="w-32 h-32 rounded-full">
+                {% else %}
+                <img src="{% static 'images/icons/user.png' %}" class="w-32 h-32 rounded-full">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-span-1 md:col-span-2">
+            <div class="font-bold text-lg">{{ member.name }}</div>
+
+            {% if member.qualification %}
+            <div class="mb-3 text-gray-500 text-xs">{{ member.qualification }}</div>
+            {% endif %}
+
+            {% if member.affiliation %}
+            <div class="text-sm"><strong>Affiliation</strong> : <span class="text-gray-500">{{ member.affiliation }}</span></div>
+            {% endif %}
+            {% if member.since %}
+            <div class="text-sm"><strong>Member Since</strong> : <span class="text-gray-500">{{ member.since }}</span></div>
+            {% endif %}
+            {% if member.membershipId %}
+            <div class="text-sm"><strong>Membership ID</strong> : <span class="text-gray-500">{{ member.membershipId }}</span></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
