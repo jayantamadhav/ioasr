@@ -33,7 +33,7 @@
                     <div class="mt-3 flex flex-col text-sm font-light text-gray-400">
                         <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:about" %}'">About Us <i data-feather="arrow-up-right" width="16"></i></div>
                         <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:contact" %}'">Contact Us <i data-feather="arrow-up-right" width="16"></i></div>
-                        <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:payments" %}'">Online Payments <i data-feather="arrow-up-right" width="16"></i></div>
+                        {% comment %} <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:payments" %}'">Online Payments <i data-feather="arrow-up-right" width="16"></i></div> {% endcomment %}
                         <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:join-as-editor" %}'">Join as Editor <i data-feather="arrow-up-right" width="16"></i></div>
                         <div class="cursor-pointer hover:underline flex items-center space-x-2" onclick="location.href='{% url "core:join-as-reviewer" %}'">Join as Reviewer <i data-feather="arrow-up-right" width="16"></i></div>
                     </div>
@@ -54,33 +54,33 @@
                         src="{% static 'images/icons/googlescholar.png' %}" 
                         class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
                         {% if site_config.google_scholar %}
-                        onclick="location.href='{{google_scholar}}'"
+                        onclick="location.href='#'"
                         {% endif %}
                         />
                         <img 
                         src="{% static 'images/icons/academia-edu.png' %}" 
                         class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl bg-white" 
-                        onclick="location.href='https://independent.academia.edu/IarconInternational'"
+                        onclick="location.href='#'"
                         />
                         <img 
                         src="{% static 'images/icons/facebook.png' %}" 
                         class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
-                        onclick="location.href='https://www.facebook.com/iarcon'"
+                        onclick="location.href='#'"
                         />
                         <img 
                         src="{% static 'images/icons/linkedin.png' %}" 
                         class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
-                        onclick="location.href='https://www.linkedin.com/company/iarcon/'"
+                        onclick="location.href='#'"
                         />
                         <img 
                         src="{% static 'images/icons/twitter.png' %}" 
                         class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
-                        onclick="location.href='https://www.twitter.com/IARCONGlobal'"
+                        onclick="location.href='#'"
                         />
                         <img 
                         src="{% static 'images/icons/youtube.png' %}" 
                         class="w-10 h-10 rounded-full cursor-pointer hover:shaodw-xl" 
-                        onclick="location.href='https://www.youtube.com/@IARCON'"
+                        onclick="location.href='#'"
                         />
                     </div>
                 </div>

@@ -30,10 +30,10 @@ urlpatterns = [
     path("blogs/<str:url>/", BlogDetailsView.as_view(), name="blog-details"),
 
     # Payments
-    path("payments/", PaymentView.as_view(), name="payments"),
-    path("payments/callback/", PaymentCallbackView.as_view(), name="payments-callback"),
-    path("payments/success/", PaymentSuccessView.as_view(), name="payments-success"),
-    path("payments/failed/", PaymentFailedView.as_view(), name="payments-failed"),
+    # path("payments/", PaymentView.as_view(), name="payments"),
+    # path("payments/callback/", PaymentCallbackView.as_view(), name="payments-callback"),
+    # path("payments/success/", PaymentSuccessView.as_view(), name="payments-success"),
+    # path("payments/failed/", PaymentFailedView.as_view(), name="payments-failed"),
     
     # Memberships
     path("membership/apply/", MembershipApplicationView.as_view(), name="membership-apply"),
